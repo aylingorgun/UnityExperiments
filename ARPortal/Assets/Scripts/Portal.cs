@@ -1,7 +1,7 @@
 ﻿/*
  * This Class handles flipping the global _StencilTest property when the device
  * moves throught the portal, from any direction
- */
+ 
 
 
 
@@ -65,9 +65,6 @@ public class Portal : MonoBehaviour
     }
 
 
-    /*If there has been a change in the relative position of the device to the portal, flip the
-     *Stencil Test
-     */
 
     void WhileCameraColliding()
     {
@@ -94,3 +91,4 @@ public class Portal : MonoBehaviour
         WhileCameraColliding();
     }
 }
+*/
