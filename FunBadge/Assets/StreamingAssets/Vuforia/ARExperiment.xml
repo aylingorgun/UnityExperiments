@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="logo" size="1.000000 0.329268" />
+    <ImageTarget name="Bdfs" size="10000000.000000 7500000.000000" />
+    <ImageTarget name="vapur5" size="10000.000000 5534.090820" />
+    <ImageTarget name="Background" size="640.000000 1126.099731" />
+  </Tracking>
+</QCARConfig>
