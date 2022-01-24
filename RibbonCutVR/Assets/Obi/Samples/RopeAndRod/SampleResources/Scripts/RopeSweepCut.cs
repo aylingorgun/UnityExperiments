@@ -10,8 +10,11 @@ public class RopeSweepCut : MonoBehaviour
     public Camera cam;
 
     ObiRope rope;
-    LineRenderer lineRenderer;
+    public LineRenderer lineRenderer;
     Vector3 cutStartPosition;
+
+    public Transform TransformOne;
+    public Transform TransformTwo;
 
     private void Awake()
     {
@@ -22,19 +25,24 @@ public class RopeSweepCut : MonoBehaviour
 
     private void OnDestroy()
     {
-        DeleteMouseLine();
+        //DeleteMouseLine();
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Finish") {
+            Debug.Log("Test");
+        }
     }
 
     private void AddMouseLine()
     {
-        GameObject line = new GameObject("Mouse Line");
-        lineRenderer = line.AddComponent<LineRenderer>();
+        //GameObject line = new GameObject("Mouse Line");
+        //lineRenderer = line.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.005f;
         lineRenderer.endWidth = 0.005f;
-        lineRenderer.numCapVertices = 2;
+        //lineRenderer.numCapVertices = 2;
         lineRenderer.sharedMaterial = new Material(Shader.Find("Unlit/Color"));
         lineRenderer.sharedMaterial.color = Color.cyan;
-        lineRenderer.enabled = false;
     }
 
     private void DeleteMouseLine()
@@ -57,23 +65,14 @@ public class RopeSweepCut : MonoBehaviour
      */
     private void ProcessInput()
     {
-        // When the user clicks the mouse, start a line cut:
-        if (Input.GetMouseButtonDown(0))
-        {
-            cutStartPosition = Input.mousePosition;
-            lineRenderer.SetPosition(0, cam.ScreenToWorldPoint(new Vector3(cutStartPosition.x, cutStartPosition.y, 0.5f)));
-            lineRenderer.enabled = true;
-        }
+        lineRenderer.SetPosition(0, TransformOne.position);
+        lineRenderer.SetPosition(1, TransformTwo.position);
 
-        if (lineRenderer.enabled)
-            lineRenderer.SetPosition(1, cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.5f)));
-
-        // When the user lifts the mouse, proceed to cut.
-        if (Input.GetMouseButtonUp(0))
-        {
-            ScreenSpaceCut(cutStartPosition, Input.mousePosition);
-            lineRenderer.enabled = false;
-        }
+        Vector3 screenPos = cam.WorldToScreenPoint(TransformOne.position);
+        Vector3 screenPos2 = cam.WorldToScreenPoint(TransformTwo.position);
+        
+        ScreenSpaceCut(-screenPos, new Vector2(0.0f, 0.0f));
+        //Debug.Log(screenPos);
     }
 
 
