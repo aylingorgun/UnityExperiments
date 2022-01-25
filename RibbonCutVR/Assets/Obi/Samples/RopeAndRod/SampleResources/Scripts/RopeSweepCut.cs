@@ -28,12 +28,6 @@ public class RopeSweepCut : MonoBehaviour
         //DeleteMouseLine();
     }
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Finish") {
-            Debug.Log("Test");
-        }
-    }
-
     private void AddMouseLine()
     {
         //GameObject line = new GameObject("Mouse Line");
@@ -51,13 +45,19 @@ public class RopeSweepCut : MonoBehaviour
             Destroy(lineRenderer.gameObject);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         // do nothing if we don't have a camera to cut from.
         if (cam == null) return;
 
         // process user input and cut the rope if necessary.
-        ProcessInput();
+        //ProcessInput();
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Finish") {
+            ProcessInput();
+        }
     }
 
     /**
@@ -65,14 +65,13 @@ public class RopeSweepCut : MonoBehaviour
      */
     private void ProcessInput()
     {
-        lineRenderer.SetPosition(0, TransformOne.position);
-        lineRenderer.SetPosition(1, TransformTwo.position);
+        //lineRenderer.SetPosition(0, TransformOne.position);
+        //lineRenderer.SetPosition(1, TransformTwo.position);
 
-        Vector3 screenPos = cam.WorldToScreenPoint(TransformOne.position);
-        Vector3 screenPos2 = cam.WorldToScreenPoint(TransformTwo.position);
+        //Vector3 screenPos = cam.WorldToScreenPoint(TransformOne.position);
+        //Vector3 screenPos2 = cam.WorldToScreenPoint(TransformTwo.position);
         
-        ScreenSpaceCut(-screenPos, new Vector2(0.0f, 0.0f));
-        //Debug.Log(screenPos);
+        ScreenSpaceCut(new Vector2(0.0f, 10000f), new Vector2(0.0f, 0.0f));
     }
 
 
